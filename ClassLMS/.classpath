@@ -25,6 +25,5 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Ahmed/Downloads/hibernate-core-3.3.2.GA.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
