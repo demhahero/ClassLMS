@@ -1,27 +1,19 @@
 package com.mju.software;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
 
-
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mju.dao.DataTaker;
-import com.mju.model.AdminModel;
+import com.mju.model.UserModel;
 
 @Controller
 public class LoginController {
 
-	HashMap<String, String> user;
+	UserModel user;
 
 	
 	/**
@@ -36,8 +28,7 @@ public class LoginController {
 	@RequestMapping(value = "/dologin", method = RequestMethod.POST)
 	public String doLogin(Locale locale, Model model , @ModelAttribute("username") String username , @ModelAttribute("password") String password) {
 
-	
-		AdminModel am = new AdminModel();
+		UserModel am = new UserModel();
 		am.setUsername(username);
 		am.setPassword(password);
 		
@@ -53,10 +44,10 @@ public class LoginController {
 	
 	//Functions Area
 	
-	public boolean login(AdminModel am) {
+	public boolean login(UserModel am) {
 		DataTaker dt = new DataTaker();
 		
-		HashMap<String, String> user = dt.getUser(am);
+		UserModel user = dt.getUser(am);
 		
 		if (user != null){
 			this.user = user;
@@ -64,10 +55,6 @@ public class LoginController {
 		}
 		else
 			return false;
-	}
-	
-	public HashMap<String, String> getUserInfo() {
-		return this.user;
 	}
 
 	public boolean logout() {

@@ -7,7 +7,7 @@
 <title>Admins Login Area</title>
 </head>
 <body>
-<form action="doLogin" method="post">
+<form action="/doLogin" method="POST">
 UserName: <input name="username" /> <br/>
 Password: <input name="password" /> <br/>
 <input type="submit" value="Login" />

@@ -1,21 +1,41 @@
 package com.mju.dao;
 
 import java.util.HashMap;
+import java.util.Map;
 
-import com.mju.model.AdminModel;
-import com.mju.model.CourseModel;
+import com.mju.model.*;
 
 
 public class DataTaker {
-
-    String username = "Ahmed";
-    String password = "pass";
-    String ID = "1";
   
+	UserModel user;
+	
     CourseModel[] courses = new CourseModel[4];
+    
+    Map<String, UserModel> userMap = new HashMap<String, UserModel>();
     
     int NOC;
     public DataTaker(){
+    	// Pseudo users
+    	AdminModel am = new AdminModel();
+    	am.setUsername("Ahmed");
+    	am.setPassword("pass");
+    	am.setID(1);
+    	userMap.put(am.getUsername(), am);
+    	
+    	ProfessorModel pm = new ProfessorModel();
+    	pm.setUsername("Prof.Choi");
+    	pm.setPassword("pass");
+    	pm.setID(2);
+    	userMap.put(pm.getUsername(), pm);
+    	
+    	StudentModel sm = new StudentModel();
+    	sm.setUsername("Hai");
+    	sm.setPassword("pass");
+    	sm.setID(3);
+    	userMap.put(sm.getUsername(), sm);
+    	
+    	// Pseudo courses
     	courses[0] = new CourseModel();
     	courses[0].setTitle("c1");
     	courses[0].setID(0);
@@ -32,17 +52,14 @@ public class DataTaker {
     	NOC = 4;
     }
     
-    public HashMap<String, String> getUser(AdminModel am) {
-        HashMap<String, String> user = new HashMap<String, String>();
+    public UserModel getUser(UserModel m) {
+        UserModel user = userMap.get(m.getUsername());
 
-        if(am.getUsername().equals(this.username) && am.getPassword().equals(this.password)) {
-            user.put("username", this.username);
-            user.put("password", this.password);
-            user.put("ID", this.ID);
-            return user;
-        }
-        else
+        if (user != null && m.getPassword().equals(user.getPassword())) {
+        	return user;
+        } else {
         	return null;
+        }
     }
 
     public boolean logoutUser() {
@@ -50,9 +67,8 @@ public class DataTaker {
         return true;
     }
 
-    public boolean addNewUser(AdminModel am) {
-        this.username = am.getUsername();
-        this.password = am.getPassword();
+    public boolean addNewUser(UserModel am) {
+        this.user = am;
         return true;
     }
 

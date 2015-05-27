@@ -1,7 +1,7 @@
 package com.mju.model;
 
-public class StudentModel {
-	int id;
-	String name;
-	String password;
+import com.mju.model.UserModel;
+
+public class StudentModel extends UserModel {
+	
 }
